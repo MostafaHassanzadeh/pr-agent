@@ -435,7 +435,7 @@ class BitbucketServerProvider(GitProvider):
         return self.pr.title
 
     def get_languages(self):
-        return {"yaml": 0}  # devops LOL
+        return {}  # devops LOL
 
     def get_pr_branch(self):
         return self.pr.fromRef['displayId']
