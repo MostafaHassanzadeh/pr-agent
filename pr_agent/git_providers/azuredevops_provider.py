@@ -1118,9 +1118,9 @@ class AzureDevopsProvider(GitProvider):
 
     def get_latest_commit_url(self) -> str:
         commits = self.azure_devops_client.get_pull_request_commits(self.repo_slug, self.pr_num, self.workspace_slug)
+        if not commits:
+            return ""
         last = commits[0]
-        # workspace/repo slugs are stored decoded (e.g. "Dev Project") for the REST API,
-        # so re-encode them when building a web URL to avoid raw spaces in markdown output
         workspace = quote(self.workspace_slug, safe='')
         repo = quote(self.repo_slug, safe='')
         url = self.azure_devops_client.normalized_url + "/" + workspace + "/_git/" + repo + "/commit/" + last.commit_id
