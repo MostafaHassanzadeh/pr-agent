@@ -2,6 +2,7 @@ import difflib
 import re
 import shlex
 import subprocess
+from collections import Counter
 from typing import Optional, Tuple
 from urllib.parse import quote_plus, urlparse
 
@@ -11,7 +12,7 @@ from requests.exceptions import HTTPError
 
 from ..algo.file_filter import filter_ignored
 from ..algo.git_patch_processing import decode_if_bytes
-from ..algo.language_handler import is_valid_file
+from ..algo.language_handler import build_language_file_matcher,is_valid_file
 from ..algo.types import EDIT_TYPE, FilePatchInfo
 from ..algo.utils import find_line_number_of_relevant_line_in_file, load_large_diff
 from ..config_loader import get_settings, get_verbosity_level
@@ -435,7 +436,23 @@ class BitbucketServerProvider(GitProvider):
         return self.pr.title
 
     def get_languages(self):
-        return {"yaml": 0}  # devops LOL
+    # Return {language-name: percentage}, matching the other providers.
+    # sort_files_by_main_languages() keys on language NAMES, so returning
+    # raw extensions (or a hardcoded stub) drops every file into "Other"
+    # and disables language-based hunk prioritisation.
+        lang_map = get_settings().get("language_extension_map_org", {}) or {}
+        get_language = build_language_file_matcher(lang_map)
+
+        lang_count = Counter()
+        for filename in self.get_files():
+            if not filename:
+                continue
+            language = get_language(filename)
+            if language:
+                lang_count[language] += 1
+
+        total = sum(lang_count.values()) or 1
+        return {lang: count / total * 100 for lang, count in lang_count.items()}
 
     def get_pr_branch(self):
         return self.pr.fromRef['displayId']
