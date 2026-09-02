@@ -436,10 +436,7 @@ class BitbucketServerProvider(GitProvider):
         return self.pr.title
 
     def get_languages(self):
-    # Return {language-name: percentage}, matching the other providers.
-    # sort_files_by_main_languages() keys on language NAMES, so returning
-    # raw extensions (or a hardcoded stub) drops every file into "Other"
-    # and disables language-based hunk prioritisation.
+        # Return {language name: percentage}, like the other providers.
         lang_map = get_settings().get("language_extension_map_org", {}) or {}
         get_language = build_language_file_matcher(lang_map)
 
