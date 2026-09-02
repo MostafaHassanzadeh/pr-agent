@@ -12,7 +12,7 @@ from requests.exceptions import HTTPError
 
 from ..algo.file_filter import filter_ignored
 from ..algo.git_patch_processing import decode_if_bytes
-from ..algo.language_handler import build_language_file_matcher,is_valid_file
+from ..algo.language_handler import build_language_file_matcher, is_valid_file
 from ..algo.types import EDIT_TYPE, FilePatchInfo
 from ..algo.utils import find_line_number_of_relevant_line_in_file, load_large_diff
 from ..config_loader import get_settings, get_verbosity_level
