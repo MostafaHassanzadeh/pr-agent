@@ -316,11 +316,6 @@ MAX_TOKENS = {
     'claude-instant-1': 100000,
     'claude-2': 100000,
     'deepseek/deepseek-chat': 128000,  # 128K, but may be limited by config.max_model_tokens
-    # deepseek/deepseek-reasoner and moonshot/kimi-k3 were removed from here
-    # (issue #3196): both were understated vs. LiteLLM (64000 vs 131072,
-    # 262144 vs 1048576) and both resolve correctly through the
-    # get_max_tokens() LiteLLM fallback, including from the offline bundled
-    # cost map.
     'zai/glm-5.2': 1000000,  # 1M per LiteLLM (issue #3196); kept pinned: absent from LiteLLM's bundled cost map
     'openai/qwq-plus': 131072,  # 131K context length, but may be limited by config.max_model_tokens
     "openrouter/auto": 2000000,  # 2M context length, but may be limited by config.max_model_tokens
