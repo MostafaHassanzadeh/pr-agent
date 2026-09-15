@@ -288,11 +288,6 @@ MAX_TOKENS = {
     'gpt-4-32k': 32000,
     'gpt-4.5-preview': 128000,  # 128K, but may be limited by config.max_model_tokens
     'gpt-4.5-preview-2025-02-27': 128000,  # 128K, but may be limited by config.max_model_tokens
-    # NOTE (issue #3196): gpt-5 / gpt-5-nano / gpt-5-mini / gpt-5.1* / gpt-5.1-codex*
-    # were removed from here — they were pinned at a stale, understated 200000
-    # while LiteLLM reports 272000. Deleting them lets get_max_tokens() fall back
-    # to litellm.get_model_info(), which resolves correctly even from LiteLLM's
-    # offline bundled cost map.
     'gpt-5.1-chat-latest': 200000,
     'gpt-5.2': 400000,  # 400K, but may be limited by config.max_model_tokens
     'gpt-5.2-2025-12-11': 400000,  # 400K, but may be limited by config.max_model_tokens
