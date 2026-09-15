@@ -416,11 +416,6 @@ MAX_TOKENS = {
     "watsonx/ibm/granite-34b-code-instruct": 8191,
     "deepinfra/deepseek-ai/DeepSeek-R1-Distill-Qwen-32B": 128000,
     "deepinfra/deepseek-ai/DeepSeek-R1-Distill-Llama-70B": 128000,
-    # ollama/llama3, watsonx/mistralai/mistral-large, deepinfra/deepseek-ai/DeepSeek-R1,
-    # and the mistral/* and codestral/* entries were removed from here (issue #3196):
-    # all were understated vs. LiteLLM (e.g. mistral/mistral-large-latest was 128000
-    # vs LiteLLM's 262144) and all resolve correctly through the get_max_tokens()
-    # LiteLLM fallback, including from the offline bundled cost map.
     'xiaomi_mimo/mimo-v2.5': 1048576,  # 1M, matching the LiteLLM registry for mimo-v2.5, xiaomi_mimo/ is the native LiteLLM Xiaomi provider, but may be limited by config.max_model_tokens
     'xiaomi_mimo/mimo-v2.5-pro': 1048576,  # 1M, matching the LiteLLM registry for mimo-v2.5-pro, but may be limited by config.max_model_tokens
     # Provider-prefixed Claude model IDs generated from _CLAUDE_MODEL_FAMILIES
